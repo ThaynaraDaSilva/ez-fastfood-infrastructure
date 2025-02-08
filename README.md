@@ -10,3 +10,4 @@
 - ALB
 - Security Groups
 - Database
+- SQS
