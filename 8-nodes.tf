@@ -66,7 +66,7 @@ resource "aws_iam_role_policy_attachment" "amazon_ec2_container_registry_read_on
 resource "aws_eks_node_group" "general" {
   cluster_name  = aws_eks_cluster.eks.name
   version       = local.eks_version
-  node_group_name = "general"
+  node_group_name = "${local.project}-node-group-general"
   node_role_arn  = aws_iam_role.nodes.arn
 
   subnet_ids = [
@@ -78,9 +78,9 @@ resource "aws_eks_node_group" "general" {
   instance_types = ["t3.medium"] # ajuste aplicado
 
   scaling_config {
-    desired_size = 2 # ajuste aplicado
-    max_size = 3
-    min_size = 1
+    desired_size = 1 # 4 para microsservicos e 1 para EKS
+    max_size = 2 # expansao maxima se necessario pensando em falha
+    min_size = 1 # redundancia minima
   }
   # cluster upgrades
   update_config {
@@ -88,6 +88,7 @@ resource "aws_eks_node_group" "general" {
   }
   labels = {
     role = "general"
+    "project" = "${local.project}"
   }
 
   # wait until IAM Role and policies are created and attached
@@ -101,4 +102,84 @@ resource "aws_eks_node_group" "general" {
    lifecycle {
      ignore_changes = [ scaling_config[0].desired_size ]
    }
+}
+
+resource "aws_eks_node_group" "order_nodes" {
+  cluster_name  = aws_eks_cluster.eks.name
+  node_role_arn  = aws_iam_role.nodes.arn
+  node_group_name = "${local.project}-node-group-order"
+  subnet_ids      = [aws_subnet.private_zone1.id, aws_subnet.private_zone2.id]
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 2
+    min_size     = 1
+  }
+
+  instance_types = ["t3.medium"]
+
+  labels = {
+    "service" = "order"
+    "project" = "${local.project}"
+  }
+}
+
+resource "aws_eks_node_group" "payment_nodes" {
+  cluster_name  = aws_eks_cluster.eks.name
+  node_role_arn  = aws_iam_role.nodes.arn
+  node_group_name = "${local.project}-node-group-payment"
+  subnet_ids      = [aws_subnet.private_zone1.id, aws_subnet.private_zone2.id]
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 2
+    min_size     = 1
+  }
+
+  instance_types = ["t3.medium"]
+
+  labels = {
+    "service" = "payment"
+    "project" = "${local.project}"
+  }
+}
+
+resource "aws_eks_node_group" "user_nodes" {
+  cluster_name  = aws_eks_cluster.eks.name
+  node_role_arn  = aws_iam_role.nodes.arn
+  node_group_name = "${local.project}-node-group-user"
+  subnet_ids      = [aws_subnet.private_zone1.id, aws_subnet.private_zone2.id]
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 2
+    min_size     = 1
+  }
+
+  instance_types = ["t3.medium"]
+
+  labels = {
+    "service" = "user"
+    "project" = "${local.project}"
+  }
+}
+
+resource "aws_eks_node_group" "catalog_nodes" {
+  cluster_name  = aws_eks_cluster.eks.name
+  node_role_arn  = aws_iam_role.nodes.arn
+  node_group_name = "${local.project}-node-group-catalog"
+  subnet_ids      = [aws_subnet.private_zone1.id, aws_subnet.private_zone2.id]
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 2
+    min_size     = 1
+  }
+
+  instance_types = ["t3.medium"]
+
+  labels = {
+    "service" = "catalog"
+    "project" = "${local.project}"
+  }
 }
