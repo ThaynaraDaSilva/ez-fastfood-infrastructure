@@ -5,5 +5,5 @@ locals{
     zone1 = "us-east-1a"
     zone2 = "us-east-1b"
     eks_name = "ez-fastfood"
-    eks_version = "1.29" # 1.32
+    eks_version = "1.32" # 1.29
 }
