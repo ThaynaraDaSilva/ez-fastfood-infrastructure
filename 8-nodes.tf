@@ -124,7 +124,7 @@ resource "aws_eks_node_group" "order_nodes" {
   }
 }
 
-/*resource "aws_eks_node_group" "payment_nodes" {
+resource "aws_eks_node_group" "payment_nodes" {
   cluster_name  = aws_eks_cluster.eks.name
   node_role_arn  = aws_iam_role.nodes.arn
   node_group_name = "${local.project}-node-group-payment"
@@ -142,7 +142,7 @@ resource "aws_eks_node_group" "order_nodes" {
     "service" = "payment"
     "project" = "${local.project}"
   }
-}*/
+}
 
 /*resource "aws_eks_node_group" "user_nodes" {
   cluster_name  = aws_eks_cluster.eks.name
