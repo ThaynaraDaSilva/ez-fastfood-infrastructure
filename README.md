@@ -34,16 +34,19 @@ inserir imagem aqui
 **OBS...**: Foram criados três schemas dentro de uma única instância de banco de dados para garantir o isolamento lógico dos microsserviços, ao mesmo tempo em que se otimiza os custos. Essa abordagem evita a necessidade de provisionar múltiplas instâncias de banco de dados, reduzindo o consumo de recursos da AWS e simplificando a administração da infraestrutura, sem comprometer a separação dos dados entre os serviços.
 
 ## 1. Pré requisitos - ambiente AWS
+
 1. Credenciais AWS para permitir o provisionamento de recursos. No pipeline configurado no GitHub Actions, as credenciais foram armazenadas como secret variables para evitar exposição direta no código:
    - AWS_ACCESS_KEY_ID
    - AWS_SECRET_ACCESS_KEY
   
 2. Execução da pipeline de criação de infraestrutura
 
-3. Execução manual do arquivo **postgres-dbs.sql**, disponível na raiz do projeto: https://github.com/ThaynaraDaSilva/ez-fastfood-infrastructure. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir os microsserviços.
+3. Execução manual do arquivo **postgres-dbs.sql**, disponível na raiz deste repositório: https://github.com/ThaynaraDaSilva/ez-fastfood-infrastructure. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir os microsserviços.
 
+4. Execução manual do arquivo **init-mongo.js**, disponível na raiz deste repositório. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir o microsserviço **user-ms**
 
 ## 2. Pré requisitos - deploy dos microsserviços
+
 É necessário realizar deploy dos microsserviços nesta ordem:
 
 1. ez-fastfood-user: https://github.com/ThaynaraDaSilva/ez-fastfood-user-ms 
