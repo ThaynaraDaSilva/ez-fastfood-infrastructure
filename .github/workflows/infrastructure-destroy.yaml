@@ -1,0 +1,39 @@
+name: Ez-fastfood Destroy Infrastructure Pipeline
+
+on:
+  workflow_dispatch: # Manually triggered
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  Destroy:
+    name: Destroy Terraform Resources
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download Terraform State File
+        uses: actions/download-artifact@v4
+        with:
+          name: terraform-state
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve

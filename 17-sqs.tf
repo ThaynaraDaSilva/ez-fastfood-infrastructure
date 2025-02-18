@@ -1,3 +1,8 @@
+
+data "aws_iam_policy" "existing_sqs_access" {
+  name = "EKS-SQS-Access"
+}
+
 resource "aws_sqs_queue" "order_payment_dlq" {
   name                      = "${local.project}-order-payment-dlq-${local.env}"
   message_retention_seconds = 86400  # 1 dia de retenção
@@ -28,6 +33,7 @@ resource "aws_sqs_queue" "order_payment_queue" {
 }
 
 resource "aws_iam_policy" "sqs_access" {
+  count = length(data.aws_iam_policy.existing_sqs_access.arn) > 0 ? 0 : 1
   name        = "EKS-SQS-Access"
   description = "Permite que os nodes do EKS acessem a fila SQS"
   

@@ -1,3 +1,6 @@
+data "aws_lb_target_group" "existing_tg" {
+  name = "ez-fastfood-tg"
+}
 resource "aws_lb" "alb" {
   name               = "${local.project}-alb-${local.env}"
   internal           = false
@@ -7,6 +10,9 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_lb_target_group" "tg" {
+  
+  count = length(data.aws_lb_target_group.existing_tg.arn) > 0 ? 0 : 1
+
   name     = "ez-fastfood-tg"
   port     = 80
   protocol = "HTTP"
