@@ -1,9 +1,10 @@
-name: ez-fastfood - infrastructure
+name: Ez-fastfood Infrastructure Pipeline
 
 on:
   push:
     branches:
       - main
+      - feature/infrastructure-pipeline
     
 env:
   TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -82,3 +83,9 @@ jobs:
 
     - name: Terraform apply
       run: terraform apply -auto-approve tfplan
+
+    - name: Upload Updated Terraform State
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-state
+        path: terraform.tfstate
