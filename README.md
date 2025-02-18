@@ -11,27 +11,46 @@ Os principais recursos provisionados incluem:
 - **Banco de Dados**: 
   - AWS RDS Postgres para os microsserviços **order-ms**, **payment-ms** e **catalog-ms**.
   - AWS Document para o microsserviço **user-ms**.
-= **Mensageria**: AWS SQS para fila de pagamento, utilizada por order-ms e payment-ms.
+- **Mensageria**: AWS SQS para fila de pagamento, utilizada por order-ms e payment-ms.
 
 ## Desenho de Arquitetura
 
 ## Video de apresentação da arquitetura
 
-## Pré requisitos
+## Modelagem BD - Schema: EZ_FASTFOOD_ORDER
+![Image](https://github.com/user-attachments/assets/90cf4f0f-7c17-4168-9abc-32a437f99866)
+
+## Modelagem BD - Schema: EZ_FASTFOOD_PAYMENT
+![Image](https://github.com/user-attachments/assets/ce4193ab-0e5b-462d-b161-ef04167c1b40)
+
+## Modelagem BD - Schema: EZ_FASTFOOD_CATALOG
+![Image](https://github.com/user-attachments/assets/34139a6d-bf65-4465-9b8e-083ba6519ffd)
+
+**OBS...**: Foram criados três schemas dentro de uma única instância de banco de dados para garantir o isolamento lógico dos microsserviços, ao mesmo tempo em que se otimiza os custos. Essa abordagem evita a necessidade de provisionar múltiplas instâncias de banco de dados, reduzindo o consumo de recursos da AWS e simplificando a administração da infraestrutura, sem comprometer a separação dos dados entre os serviços.
+
+## Modelagem BD - Schema: EZ_FASTFOOD_USER
+
+## 1. Pré requisitos - ambiente AWS
 1. Credenciais AWS para permitir o provisionamento de recursos. No pipeline configurado no GitHub Actions, as credenciais foram armazenadas como secret variables para evitar exposição direta no código:
-- AWS_ACCESS_KEY_ID
-- AWS_SECRET_ACCESS_KEY
+   - AWS_ACCESS_KEY_ID
+   - AWS_SECRET_ACCESS_KEY
   
 2. Execução da pipeline de criação de infraestrutura
 
 3. Execução manual do arquivo **postgres-dbs.sql**, disponível no repositório: https://github.com/ThaynaraDaSilva/ez-fastfood-infrastructure. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir os microsserviços.
 
 
-## Commands
+## 2. Pré requisitos - deploy dos microsserviços
+É necessário realizar deploy dos microsserviços nesta ordem:
 
-aws eks update-kubeconfig --region us-east-1 --name ez-fastfood-cluster-dev
+1. ez-fastfood-user: https://github.com/ThaynaraDaSilva/ez-fastfood-user-ms 
+2. ez-fastfood-catalog: https://github.com/ThaynaraDaSilva/ez-fastfood-catalog-ms
+3. ez-fastfood-payment: https://github.com/ThaynaraDaSilva/ez-fastfood-payment-ms
+4. ez-fastfood-order: https://github.com/ThaynaraDaSilva/ez-fastfood-order-ms
 
-kubectl get pods
-kubectl get nodes
-kubectl get services
+## Link dos demais repositórios do projeto EZ_FASTFOOD:
 
+
+## Desenvolvido por:
+@tchfer : RM357414<br>
+@ThaynaraDaSilva : RM357418<br>
