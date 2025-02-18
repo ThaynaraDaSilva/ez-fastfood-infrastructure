@@ -1,7 +1,9 @@
 name: ez-fastfood - infrastructure
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
     
 env:
   TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
