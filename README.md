@@ -40,7 +40,7 @@ inserir imagem aqui
   
 2. Execução da pipeline de criação de infraestrutura
 
-3. Execução manual do arquivo **postgres-dbs.sql**, disponível no repositório: https://github.com/ThaynaraDaSilva/ez-fastfood-infrastructure. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir os microsserviços.
+3. Execução manual do arquivo **postgres-dbs.sql**, disponível na raiz do projeto: https://github.com/ThaynaraDaSilva/ez-fastfood-infrastructure. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir os microsserviços.
 
 
 ## 2. Pré requisitos - deploy dos microsserviços
