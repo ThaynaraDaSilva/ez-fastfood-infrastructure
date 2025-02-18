@@ -8,12 +8,14 @@ Os principais recursos provisionados incluem:
 - **Computação**: AWS EKS e seus Nodes.
 - **Balanceamento de Carga**: Application Load Balancer (ALB).
 - **Segurança**: Security Groups para controle de acesso.
-- **Banco de Dados**: 
+- **Banco de Dados**:
   - AWS RDS Postgres para os microsserviços **order-ms**, **payment-ms** e **catalog-ms**.
   - AWS Document para o microsserviço **user-ms**.
 - **Mensageria**: AWS SQS para fila de pagamento, utilizada por order-ms e payment-ms.
 
 ## Desenho de Arquitetura
+
+![Image](https://github.com/user-attachments/assets/6e22f311-0201-40d3-b06a-1f95c494fb54)
 
 ## Video de apresentação da arquitetura
 
@@ -26,10 +28,8 @@ Os principais recursos provisionados incluem:
 ## Modelagem BD - Schema: EZ_FASTFOOD_CATALOG
 ![Image](https://github.com/user-attachments/assets/34139a6d-bf65-4465-9b8e-083ba6519ffd)
 
-## Modelagem BD
-
-inserir imagem aqui
-
+## Mongo DB - Estrutura utilizada:
+![Image](https://github.com/user-attachments/assets/a2a12a1b-ab29-40f8-88f7-7eb779c27344)
 
 **OBS...**: Foram criados três schemas dentro de uma única instância de banco de dados para garantir o isolamento lógico dos microsserviços, ao mesmo tempo em que se otimiza os custos. Essa abordagem evita a necessidade de provisionar múltiplas instâncias de banco de dados, reduzindo o consumo de recursos da AWS e simplificando a administração da infraestrutura, sem comprometer a separação dos dados entre os serviços.
 
@@ -43,7 +43,7 @@ inserir imagem aqui
 
 3. Execução manual do arquivo **postgres-dbs.sql**, disponível na raiz deste repositório: https://github.com/ThaynaraDaSilva/ez-fastfood-infrastructure. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir os microsserviços.
 
-4. Execução manual do arquivo **init-mongo.js**, disponível na raiz deste repositório. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir o microsserviço **user-ms**
+4. Criação manual do **sibling** e **collection**, igual a definição que está no arquivo **init-mongo.js**, disponível na raiz deste repositório. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir o microsserviço **user-ms**
 
 ## 2. Pré requisitos - deploy dos microsserviços
 
@@ -53,9 +53,6 @@ inserir imagem aqui
 2. ez-fastfood-catalog: https://github.com/ThaynaraDaSilva/ez-fastfood-catalog-ms
 3. ez-fastfood-payment: https://github.com/ThaynaraDaSilva/ez-fastfood-payment-ms
 4. ez-fastfood-order: https://github.com/ThaynaraDaSilva/ez-fastfood-order-ms
-
-## Link dos demais repositórios do projeto EZ_FASTFOOD:
-
 
 ## Desenvolvido por:
 @tchfer : RM357414<br>
