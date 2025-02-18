@@ -28,6 +28,9 @@ Os principais recursos provisionados incluem:
 
 ## Modelagem BD - Schema: EZ_FASTFOOD_USER
 
+inserir imagem aqui
+
+
 **OBS...**: Foram criados três schemas dentro de uma única instância de banco de dados para garantir o isolamento lógico dos microsserviços, ao mesmo tempo em que se otimiza os custos. Essa abordagem evita a necessidade de provisionar múltiplas instâncias de banco de dados, reduzindo o consumo de recursos da AWS e simplificando a administração da infraestrutura, sem comprometer a separação dos dados entre os serviços.
 
 ## 1. Pré requisitos - ambiente AWS
