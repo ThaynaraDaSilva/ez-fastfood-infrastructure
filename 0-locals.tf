@@ -1,5 +1,5 @@
 locals{
-    env = "prod"
+    env = "dev"
     project = "ez-fastfood"
     region = "us-east-1"
     zone1 = "us-east-1a"
