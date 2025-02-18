@@ -26,7 +26,7 @@ Os principais recursos provisionados incluem:
 ## Modelagem BD - Schema: EZ_FASTFOOD_CATALOG
 ![Image](https://github.com/user-attachments/assets/34139a6d-bf65-4465-9b8e-083ba6519ffd)
 
-## Modelagem BD - Schema: EZ_FASTFOOD_USER
+## Modelagem BD
 
 inserir imagem aqui
 
@@ -39,7 +39,7 @@ inserir imagem aqui
    - AWS_ACCESS_KEY_ID
    - AWS_SECRET_ACCESS_KEY
   
-2. Execução da pipeline de criação de infraestrutura
+2. Execução da pipeline de criação de infraestrutura. Para este repositório, optamos por manter o pipeline trigger como **workflow_dispatch** para maior controle de quando a pipeline deve ser executada, devido a custo e complexidade do ambiente.
 
 3. Execução manual do arquivo **postgres-dbs.sql**, disponível na raiz deste repositório: https://github.com/ThaynaraDaSilva/ez-fastfood-infrastructure. A execução deve ocorrer uma única vez, logo após a criação do recurso de banco de dados e antes de subir os microsserviços.
 
