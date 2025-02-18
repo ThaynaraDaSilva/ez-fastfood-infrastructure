@@ -1,6 +1,6 @@
 # Introdução
 
-Este repositório contém a **configuração da infraestrutura AWS** para os microsserviços **order-ms**, **payment-ms**, **catalog-ms** e **user-ms** do projeto **ez-fastfood**. Toda a infraestrutura, incluindo rede, computação, banco de dados e mensageria, é provisionada via Terraform, garantindo uma gestão eficiente e modular.
+Este repositório contém a **configuração do ambiente na AWS** para os microsserviços **order-ms**, **payment-ms**, **catalog-ms** e **user-ms** do projeto **ez-fastfood**. Toda a infraestrutura, incluindo rede, computação, banco de dados e mensageria, é provisionada via Terraform, garantindo uma gestão eficiente e modular.
 
 Os principais recursos provisionados incluem:
 
@@ -26,9 +26,9 @@ Os principais recursos provisionados incluem:
 ## Modelagem BD - Schema: EZ_FASTFOOD_CATALOG
 ![Image](https://github.com/user-attachments/assets/34139a6d-bf65-4465-9b8e-083ba6519ffd)
 
-**OBS...**: Foram criados três schemas dentro de uma única instância de banco de dados para garantir o isolamento lógico dos microsserviços, ao mesmo tempo em que se otimiza os custos. Essa abordagem evita a necessidade de provisionar múltiplas instâncias de banco de dados, reduzindo o consumo de recursos da AWS e simplificando a administração da infraestrutura, sem comprometer a separação dos dados entre os serviços.
-
 ## Modelagem BD - Schema: EZ_FASTFOOD_USER
+
+**OBS...**: Foram criados três schemas dentro de uma única instância de banco de dados para garantir o isolamento lógico dos microsserviços, ao mesmo tempo em que se otimiza os custos. Essa abordagem evita a necessidade de provisionar múltiplas instâncias de banco de dados, reduzindo o consumo de recursos da AWS e simplificando a administração da infraestrutura, sem comprometer a separação dos dados entre os serviços.
 
 ## 1. Pré requisitos - ambiente AWS
 1. Credenciais AWS para permitir o provisionamento de recursos. No pipeline configurado no GitHub Actions, as credenciais foram armazenadas como secret variables para evitar exposição direta no código:
