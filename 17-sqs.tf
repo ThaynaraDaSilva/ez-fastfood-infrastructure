@@ -55,10 +55,10 @@ resource "aws_sqs_queue" "order_payment_queue" {
 #   })
 # }
 
-resource "aws_iam_role_policy_attachment" "eks_sqs_attach" {
-  role       = aws_iam_role.nodes.name  # Nome do role dos nodes do EKS
-  policy_arn = aws_iam_policy.sqs_access.arn
-}
+# resource "aws_iam_role_policy_attachment" "eks_sqs_attach" {
+#   role       = aws_iam_role.nodes.name  # Nome do role dos nodes do EKS
+#   policy_arn = aws_iam_policy.sqs_access.arn
+# }
 
 resource "aws_sqs_queue_policy" "sqs_policy" {
   queue_url = aws_sqs_queue.order_payment_queue.id

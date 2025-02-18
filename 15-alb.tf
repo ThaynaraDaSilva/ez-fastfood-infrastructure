@@ -9,26 +9,26 @@ resource "aws_lb" "alb" {
   subnets           = [aws_subnet.public_zone1.id, aws_subnet.public_zone2.id]
 }
 
-resource "aws_lb_target_group" "tg" {
+# resource "aws_lb_target_group" "tg" {
   
-  #count = length(data.aws_lb_target_group.existing_tg.arn) > 0 ? 0 : 1
+#   #count = length(data.aws_lb_target_group.existing_tg.arn) > 0 ? 0 : 1
 
-  name     = "ez-fastfood-tg"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.main.id
-}
+#   name     = "ez-fastfood-tg"
+#   port     = 80
+#   protocol = "HTTP"
+#   vpc_id   = aws_vpc.main.id
+# }
 
-resource "aws_lb_listener" "listener" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = 80
-  protocol          = "HTTP"
+# resource "aws_lb_listener" "listener" {
+#   load_balancer_arn = aws_lb.alb.arn
+#   port              = 80
+#   protocol          = "HTTP"
 
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.tg.arn
-  }
-}
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.tg.arn
+#   }
+# }
 ## adicionar HTTPS ao ALB (Seguranca)
 #resource "aws_lb_listener" "https_listener" {
 #  load_balancer_arn = aws_lb.alb.arn
