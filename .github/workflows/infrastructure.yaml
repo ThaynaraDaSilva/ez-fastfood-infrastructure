@@ -1,14 +1,10 @@
 name: Ez-fastfood Infrastructure Pipeline
 
 on:
-  push:
-    branches:
-      - main
-      - feature/infrastructure-pipeline
-    
+  workflow_dispatch:
+    #branches:
+    #  - main
 env:
-  #TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #TF_VAR_aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: us-east-1
 
 jobs:
@@ -105,6 +101,7 @@ jobs:
       run: terraform apply -auto-approve tfplan
 
     - name: Upload Updated Terraform State
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: terraform-state
